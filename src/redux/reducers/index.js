@@ -14,9 +14,17 @@ const mainReducer = (state = initialState, action) => {
           content: [...state.favorites.content, action.payload],
         },
       };
+    case "DELETE_FROM_LIST":
+      return {
+        ...state,
+        favorites: {
+          ...state.favorites,
+          content: state.favorites.content.filter((_, i) => i !== action.payload),
+        },
+      };
 
     default:
-      break;
+      return state;
   }
 };
 

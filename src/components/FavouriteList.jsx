@@ -1,27 +1,40 @@
-import { Col, Container } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const FavouriteList = () => {
   const favList = useSelector((state) => state.favorites.content);
 
+  const dispatch = useDispatch();
+
   return (
     <>
-      {favList ? (
+      {favList.length > 0 ? (
         <Container fluid>
           <h1>hello from fav</h1>
-          <ul>
-            {favList.map((ele, i) => {
-              return (
-                <Col key={i}>
-                  <li>
-                    <Link to={`/${ele.company_name}`}>{ele.company_name}</Link>
-                    <p>{ele.title}</p>
-                  </li>
-                </Col>
-              );
-            })}
-          </ul>
+          {favList.map((ele, i) => (
+            <Row key={i} className="mx-0 mt-3 p-3" style={{ border: "1px solid #00000033", borderRadius: 4 }}>
+              <Col xs={3}>
+                <Link to={`/${ele.company_name}`}>{ele.company_name}</Link>
+              </Col>
+              <Col xs={9}>
+                <a href={ele.url} target="_blank" rel="noreferrer">
+                  {ele.title}
+                </a>
+                <Button
+                  className="ms-3 btn-danger"
+                  onClick={() => {
+                    dispatch({
+                      type: "DELETE_FROM_LIST",
+                      payload: i,
+                    });
+                  }}
+                >
+                  Delete
+                </Button>
+              </Col>
+            </Row>
+          ))}
         </Container>
       ) : (
         <Container fluid>
