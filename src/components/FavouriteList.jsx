@@ -11,7 +11,7 @@ const FavouriteList = () => {
     <>
       {favList.length > 0 ? (
         <Container fluid>
-          <h1>hello from fav</h1>
+          <h1>Here are your saved jobs</h1>
           {favList.map((ele, i) => (
             <Row key={i} className="mx-0 mt-3 p-3" style={{ border: "1px solid #00000033", borderRadius: 4 }}>
               <Col xs={3}>

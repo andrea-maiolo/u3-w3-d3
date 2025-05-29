@@ -14,7 +14,7 @@ const Job = ({ data }) => {
       setErrorFav("seems already saved");
       return;
     } else {
-      dispatch({ type: "SET_FAV", payload: data });
+      dispatch({ type: "SET_FAV", payload: payload });
     }
   };
 
